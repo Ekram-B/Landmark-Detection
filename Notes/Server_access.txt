@@ -1,0 +1,8 @@
+1. In order to access sandbox provided by Prof. Brubaker for 
+   implementing the network described in: 'Facial Landmark Detection by Deep Multi-task Learning',
+   type in the command:'ssh ekram67@pips.eecs.yorku.ca'
+2. Type in the password for ekram67 user: 123456789
+2. To run IPython on the sandbox provided by Prof. Brubaker,
+   type in the command::
+ 'ipython notebook --ip=pips.eecs.yorku.ca'
+
