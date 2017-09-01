@@ -234,7 +234,6 @@ with tf.Session() as sess:
         print("testing", sess.run(error, feed_dict={image:o,landmark: p.reshape((-1,10)), gender: q.reshape((-1,2)), smile: r.reshape((-1,2)), glasses: s.reshape((-1,2)), headpose: t.reshape((-1,5)),keep_prob: 1}))
         print("landmark",sess.run(landmark_error,feed_dict={image:o,landmark: p.reshape((-1,10)), gender: q.reshape((-1,2)), smile: r.reshape((-1,2)), glasses:s.reshape((-1,2)), headpose: t.reshape((-1,5)),keep_prob: 1}))
 
->>>>>>> 44e5c26279a9b8e82eaef84fb6159423fc29394d
 
 # Set up attributes
 coord = tf.train.Coordinator()
