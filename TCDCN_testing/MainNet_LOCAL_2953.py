@@ -188,53 +188,6 @@ class TCDCN:
 """
 	Main Code
 """
-<<<<<<< HEAD
-=======
-error = 1 / 2 * tf.reduce_sum(tf.square(landmark - y_landmark)) + \
-        tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits=y_gender, labels=gender)) + \
-        tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits=y_smile, labels=smile)) + \
-        tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits=y_glasses, labels=glasses)) + \
-        tf.reduce_sum(tf.nn.softmax_cross_entropy_with_logits(logits=y_headpose, labels=headpose))+\
-        2*tf.nn.l2_loss(W_fc_landmark)+\
-        2*tf.nn.l2_loss(W_fc_glasses)+\
-        2*tf.nn.l2_loss(W_fc_gender)+\
-        2*tf.nn.l2_loss(W_fc_headpose)+\
-        2*tf.nn.l2_loss(W_fc_smile)
-landmark_error = 1 / 2 * tf.reduce_sum(tf.square(landmark - y_landmark))
-# train
-train_step = tf.train.AdamOptimizer(1e-3).minimize(error)
-# Set up data_queue
-coord = tf.train.Coordinator()
-dataset = ld.AFLW_Dataset('testing.txt')
-with tf.Session() as sess:
-    # Define dataset queue
-    dataset_queue = ld.Data_Queue(dataset,imagesize=150,capacity=1000)
-    # Initialize global variables
-    sess.run(tf.global_variables_initializer())
-    # Start enqueing thread
-    dataset_queue.start_threads(coord,sess,num_threads=1)
-    for x in range(200000):
-        data_batch,target_batch = dataset_queue.get_input()
-        # get numpy versions
-	print(target_batch)
-	print(data_batch)
-	print(target_batch)
-	print(data_batch)
-        tb_numpy = sess.run(target_batch)
-        db_numpy = sess.run(data_batch)
-	print(tb_numpy)
-        i,j,k,l,m,n = dataset_queue.feature_hot_encoding(dataset.list_to_dict(tb_numpy),img) 
-        print(x, sess.run(error,feed_dict={image:i,landmark: j.reshape((-1,10)), gender: k.reshape((-1,2)), smile: l.reshape((-1,2)), glasses: m.reshape((-1,2)), headpose: n.reshape((-1,5)), keep_prob: 1}))
-        sess.run(train_step,feed_dict={image:i,landmark: j.reshape((-1,10)), gender: k.reshape((-1,2)), smile: l.reshape((-1,2)), glasses: m.reshape((-1,2)), headpose: n.reshape((-1,5)),keep_prob: 0.5})
-        data_batch,target_batch = dataset_queue.get_input()
-        # get numpy versions
-        tb_numpy = sess.run(target_batch.eval())
-        db_numpy = sess.run(data_batch.eval())
-        o,p,q,r,s,t = dataset_queue.feature_hot_encoding(dataset.list_to_dict(tb_numpy),img) 
-        print("testing", sess.run(error, feed_dict={image:o,landmark: p.reshape((-1,10)), gender: q.reshape((-1,2)), smile: r.reshape((-1,2)), glasses: s.reshape((-1,2)), headpose: t.reshape((-1,5)),keep_prob: 1}))
-        print("landmark",sess.run(landmark_error,feed_dict={image:o,landmark: p.reshape((-1,10)), gender: q.reshape((-1,2)), smile: r.reshape((-1,2)), glasses:s.reshape((-1,2)), headpose: t.reshape((-1,5)),keep_prob: 1}))
-
->>>>>>> 44e5c26279a9b8e82eaef84fb6159423fc29394d
 
 # Set up attributes
 coord = tf.train.Coordinator()
